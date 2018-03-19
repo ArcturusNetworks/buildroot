@@ -14,7 +14,7 @@ Building
 
 Return to the top directory <buildrootdir> and execute the following commands.
 
-  make arcturus_ucls1012a_defconfig
+  make arcturus_ucls1012a_som_defconfig
   make
 
 Result of the build
