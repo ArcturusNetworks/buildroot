@@ -24,7 +24,7 @@
                 };
                 fdt {
                         description = "Flattened Device Tree Blob";
-                        data = /incbin/("s32v234-evb.dtb");
+                        data = /incbin/("s32v234sbc.dtb");
                         type = "flat_dt";
                         arch = "arm64";
                         compression = "none";
