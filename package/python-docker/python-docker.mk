@@ -4,11 +4,13 @@
 #
 ################################################################################
 
-PYTHON_DOCKER_VERSION = 3.1.1
+PYTHON_DOCKER_VERSION = 4.1.0
 PYTHON_DOCKER_SOURCE = docker-$(PYTHON_DOCKER_VERSION).tar.gz
-PYTHON_DOCKER_SITE = https://pypi.python.org/packages/0d/17/ad98e025e5528337c4dc5835a5874898eb226da17e4ffed732c894cb1938
+PYTHON_DOCKER_SITE = https://files.pythonhosted.org/packages/de/54/a822d7116ff2f726f3da2b3e6c87659657bdcb7a36e382860ed505ed5e45
 PYTHON_DOCKER_SETUP_TYPE = setuptools
 PYTHON_DOCKER_LICENSE = Apache-2.0
 PYTHON_DOCKER_LICENSE_FILES = LICENSE
+PYTHON_DOCKER_CPE_ID_VENDOR = docker
+PYTHON_DOCKER_CPE_ID_PRODUCT = docker-py
 
 $(eval $(python-package))

@@ -1,5 +1,5 @@
-# Hash from: https://www.cryptopp.com/release610.html:
-sha256  21289d2511101a9350c87c8eb1f4982d4a266e8037b19dab79a32cc13ea108c7  cryptopp610.zip
+# Hash from: https://www.cryptopp.com/release860.html:
+sha512  e7773f5e4a7dc7e8e735b1702524bee56ba38e5211544c9c9778bc51ed8dc7b376c17f2e406410043b636312336f26f76dc963f298872f8c13933e88c232fc03  cryptopp860.zip
 
 # Hash for license file:
-sha256  fe5f5f187e6e38ac2f833956fc5c4cab2df08797cff07f540e4ee74f12f7ee5b  License.txt
+sha256  e668af8c73a38a66a1e8951d14ec24e7582fee5254dd6c3dae488a416d105d5f  License.txt

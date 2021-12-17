@@ -15,6 +15,9 @@ Building
 Return to the top directory <buildrootdir> and execute the following commands.
 
   make arcturus_ucls1012a_som_defconfig
+       or
+  make arcturus_ucls1012a_som120_defconfig
+
   make
 
 Result of the build
@@ -23,14 +26,17 @@ Result of the build
 After building, you should obtain this tree:
 
     output/images/
-    +-- arc-ucls1012a.dtb
-    +-- Image
+    +-- Image.gz
     +-- part0-000000.itb
     +-- rootfs.cpio
     +-- rootfs.cpio.gz
+    +-- rootfs.cramfs
+    +-- rootfs.jffs2
+    +-- rootfs.squashfs
     +-- rootfs.tar
     +-- u-boot.bin
-    +-- ucls1012a.its
+    +-- u-boot-firmware.bin
+    +-- ucls1012a-som.dtb
 
 Flashing
 --------
@@ -50,17 +56,29 @@ u-boot shell.
 
 2. Enable tftp server to serve the <buildrootdir>/output/images/ folder.
 
-3. Program the new U-Boot binary (optional)
+3. Program the new U-Boot binary and/or u-boot firmware (optional)
     If you don't feel confident upgrading your bootloader then don't do it,
     it's unnecessary most of the time.
 
     B$ tftp u-boot.bin
     B$ run program_uboot
 
+    B$ tftp u-boot-firmware.bin
+    B$ run program_uboot_firmware
+
+
 4. Program the ITB image (includes Kernel, DTB and Ramdisk)
 
     B$ tftp part0-000000.itb
-    B$ run iprogram
+    B$ run program0
+
+    B$ tftp rootfs.cramfs
+            or
+    B$ tftp rootfs.jffs2
+            or
+    B$ tftp rootfs.squashfs
+
+    B$ run program1
 
 5. Booting your new system
 

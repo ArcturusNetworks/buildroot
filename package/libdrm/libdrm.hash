@@ -1,5 +1,6 @@
-# From https://lists.x.org/archives/xorg-announce/2018-March/002853.html
-md5 23d87cda92700b710a37d9b8edaa9f54  libdrm-2.4.91.tar.bz2
-sha1 44e42ce3cd41666e343ba393c73f6f1ad9fe1e74  libdrm-2.4.91.tar.bz2
-sha256 634a0ed0cc1eff06f48674b1da81aafa661a9f001e7a4f43dde81076886dc800  libdrm-2.4.91.tar.bz2
-sha512 07578c00c121ba37033db7172590e26d1545f81c242bbce2cfb7fb904bde504822c275d6468e5c5d20360d0046ae73d9b058aa0459ba35eb11927141cc998772  libdrm-2.4.91.tar.bz2
+# From https://lists.freedesktop.org/archives/dri-devel/2021-July/313594.html
+sha256  c554cef03b033636a975543eab363cc19081cb464595d3da1ec129f87370f888  libdrm-2.4.107.tar.xz
+sha512  c7542ba15c4c934519a6a1f3cb1ec21effa820a805a030d0175313bb1cc796cd311f39596ead883f9f251679d701e262894c5a297d5cf45093c80a6cd818def0  libdrm-2.4.107.tar.xz
+
+# Hash for license file
+sha256  7e952c6666ed17c99f91ee7af13c688b8769b0feaf6f4558bf6ad3e07512e1e6  xf86drm.c
