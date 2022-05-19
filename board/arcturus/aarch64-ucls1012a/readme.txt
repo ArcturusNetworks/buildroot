@@ -77,6 +77,8 @@ u-boot shell.
     B$ run program1
     B$ setenv pactive 1
 
+    B$ saveenv
+
 4.2. For separated Kernel+DTB and Ramdisk.
 
     B$ tftp part0-000000.itb
