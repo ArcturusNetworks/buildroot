@@ -67,7 +67,17 @@ u-boot shell.
     B$ run program_uboot_firmware
 
 
-4. Program the ITB image (includes Kernel, DTB and Ramdisk)
+4.1. For all-in-one Kernel+DTB+Ramdisk.
+
+    B$ tftp part0-000000.itb
+
+    B$ run program0
+    B$ setenv pactive 0
+            or
+    B$ run program1
+    B$ setenv pactive 1
+
+4.2. For separated Kernel+DTB and Ramdisk.
 
     B$ tftp part0-000000.itb
     B$ run program0
