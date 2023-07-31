@@ -102,3 +102,4 @@ u-boot shell.
     B$ run bootcmd
 
 Good Luck !
+                                             by Oleksandr G Zhadan
