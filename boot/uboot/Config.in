@@ -41,7 +41,7 @@ choice
 	  Select the specific U-Boot version you want to use
 
 config BR2_TARGET_UBOOT_LATEST_VERSION
-	bool "2022.04"
+	bool "2024.04"
 
 config BR2_TARGET_UBOOT_CUSTOM_VERSION
 	bool "Custom version"
@@ -85,7 +85,7 @@ endif
 
 config BR2_TARGET_UBOOT_VERSION
 	string
-	default "2022.04"	if BR2_TARGET_UBOOT_LATEST_VERSION
+	default "2024.04"	if BR2_TARGET_UBOOT_LATEST_VERSION
 	default BR2_TARGET_UBOOT_CUSTOM_VERSION_VALUE \
 		if BR2_TARGET_UBOOT_CUSTOM_VERSION
 	default "custom"	if BR2_TARGET_UBOOT_CUSTOM_TARBALL
@@ -270,6 +270,16 @@ config BR2_TARGET_UBOOT_NEEDS_ROCKCHIP_RKBIN
 	  Rockchip.
 	  This option makes sure that the needed binary blobs are copied
 	  into the U-Boot source directory.
+
+config BR2_TARGET_UBOOT_USE_BINMAN
+	bool "U-Boot use binman"
+	select BR2_TARGET_UBOOT_NEEDS_PYTHON3
+	select BR2_TARGET_UBOOT_NEEDS_PYELFTOOLS
+	select BR2_TARGET_UBOOT_NEEDS_PYLIBFDT
+	help
+	  Use binman tool for generation and signing of boot images.
+
+	  https://docs.u-boot.org/en/v2024.04/develop/package/binman.html
 
 menu "U-Boot binary format"
 
@@ -486,6 +496,13 @@ config BR2_TARGET_UBOOT_SPL_NAME
 	  u-boot build. For most platform SPL name is spl/u-boot-spl.bin
 	  and TPL name is tpl/u-boot-tpl.bin but not always. SPL name is
 	  MLO on OMAP and SPL on i.MX6 for example.
+
+config BR2_TARGET_UBOOT_INITIAL_ENV
+	bool "Install u-boot-initial-env"
+	help
+	  Install the U-Boot u-boot-initial-env on the target.
+
+	  This file is typically required by libubootenv.
 
 config BR2_TARGET_UBOOT_ZYNQMP
 	bool "Boot on the Xilinx ZynqMP SoCs"

@@ -304,6 +304,14 @@ config BR2_ARCH_NEEDS_GCC_AT_LEAST_12
 	bool
 	select BR2_ARCH_NEEDS_GCC_AT_LEAST_11
 
+config BR2_ARCH_NEEDS_GCC_AT_LEAST_13
+	bool
+	select BR2_ARCH_NEEDS_GCC_AT_LEAST_12
+
+config BR2_ARCH_NEEDS_GCC_AT_LEAST_14
+	bool
+	select BR2_ARCH_NEEDS_GCC_AT_LEAST_13
+
 # The following string values are defined by the individual
 # Config.in.$ARCH files
 config BR2_ARCH
@@ -436,31 +444,6 @@ config BR2_BINFMT_FLAT
 	  FLAT binary is a relatively simple and lightweight executable
 	  format based on the original a.out format. It is widely used
 	  in environment where no MMU is available.
-
-endchoice
-
-# Set up flat binary type
-choice
-	prompt "FLAT Binary type"
-	default BR2_BINFMT_FLAT_ONE
-	depends on BR2_BINFMT_FLAT
-
-config BR2_BINFMT_FLAT_ONE
-	bool "One memory region"
-	help
-	  All segments are linked into one memory region.
-
-config BR2_BINFMT_FLAT_SHARED
-	bool "Shared binary"
-	depends on BR2_m68k
-	# Even though this really generates shared binaries, there is no libdl
-	# and dlopen() cannot be used. So packages that require shared
-	# libraries cannot be built. Therefore, we don't select
-	# BR2_BINFMT_SUPPORTS_SHARED and therefore force BR2_STATIC_LIBS.
-	# Although this adds -static to the compilation, that's not a problem
-	# because the -mid-shared-library option overrides it.
-	help
-	  Allow to load and link indiviual FLAT binaries at run time.
 
 endchoice
 

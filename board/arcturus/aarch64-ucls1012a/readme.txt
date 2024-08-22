@@ -17,6 +17,8 @@ Return to the top directory <buildrootdir> and execute the following commands.
   make arcturus_ucls1012a_som_defconfig
        or
   make arcturus_ucls1012a_som120_defconfig
+       or
+  make arcturus_ucls1012a_som314s_defconfig
 
   make
 

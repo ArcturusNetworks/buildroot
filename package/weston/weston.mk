@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-WESTON_VERSION = 12.0.1
+WESTON_VERSION = 13.0.1
 WESTON_SITE = https://gitlab.freedesktop.org/wayland/weston/-/releases/$(WESTON_VERSION)/downloads
 WESTON_SOURCE = weston-$(WESTON_VERSION).tar.xz
 WESTON_LICENSE = MIT
@@ -19,15 +19,21 @@ WESTON_CONF_OPTS = \
 	-Ddoc=false \
 	-Dremoting=false \
 	-Dbackend-vnc=false \
-	-Dlauncher-libseat=true \
 	-Dtools=calibrator,debug,info,terminal,touch-calibrator
 
-# Uses VIDIOC_EXPBUF, only available from 3.8+
+ifeq ($(BR2_PACKAGE_WESTON_SIMPLE_CLIENTS),y)
+# Note: some clients are conditional, see further for the others.
+WESTON_SIMPLE_CLIENTS = \
+	damage \
+	im \
+	shm \
+	touch
+
 ifeq ($(BR2_TOOLCHAIN_HEADERS_AT_LEAST_3_8),y)
-WESTON_CONF_OPTS += -Dsimple-clients=dmabuf-v4l
-else
-WESTON_CONF_OPTS += -Dsimple-clients=
+# dmabuf-v4l uses VIDIOC_EXPBUF, only available from 3.8+
+WESTON_SIMPLE_CLIENTS += dmabuf-v4l
 endif
+endif # BR2_PACKAGE_WESTON_SIMPLE_CLIENTS
 
 ifeq ($(BR2_PACKAGE_JPEG),y)
 WESTON_CONF_OPTS += -Dimage-jpeg=true
@@ -46,6 +52,9 @@ endif
 ifeq ($(BR2_PACKAGE_HAS_LIBEGL_WAYLAND)$(BR2_PACKAGE_HAS_LIBGBM)$(BR2_PACKAGE_HAS_LIBGLES),yyy)
 WESTON_CONF_OPTS += -Drenderer-gl=true
 WESTON_DEPENDENCIES += libegl libgbm libgles
+ifeq ($(BR2_PACKAGE_WESTON_SIMPLE_CLIENTS),y)
+WESTON_SIMPLE_CLIENTS += dmabuf-egl dmabuf-feedback egl
+endif
 ifeq ($(BR2_PACKAGE_PIPEWIRE)$(BR2_PACKAGE_WESTON_DRM),yy)
 WESTON_CONF_OPTS += -Dpipewire=true -Dbackend-pipewire=true
 WESTON_DEPENDENCIES += pipewire
@@ -58,6 +67,8 @@ WESTON_CONF_OPTS += \
 	-Dpipewire=false \
 	-Dbackend-pipewire=false
 endif
+
+WESTON_CONF_OPTS += -Dsimple-clients=$(subst $(space),$(comma),$(strip $(WESTON_SIMPLE_CLIENTS)))
 
 ifeq ($(BR2_PACKAGE_WESTON_RDP),y)
 WESTON_DEPENDENCIES += freerdp
@@ -96,7 +107,7 @@ WESTON_CONF_OPTS += -Dbackend-default=$(call qstrip,$(BR2_PACKAGE_WESTON_DEFAULT
 
 ifeq ($(BR2_PACKAGE_WESTON_XWAYLAND),y)
 WESTON_CONF_OPTS += -Dxwayland=true
-WESTON_DEPENDENCIES += cairo libepoxy libxcb xlib_libX11 xlib_libXcursor xwayland
+WESTON_DEPENDENCIES += cairo libepoxy libxcb xcb-util-cursor xlib_libX11 xlib_libXcursor xwayland
 else
 WESTON_CONF_OPTS += -Dxwayland=false
 endif

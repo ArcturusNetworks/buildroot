@@ -19,7 +19,6 @@ config BR2_PACKAGE_WESTON
 	select BR2_PACKAGE_LIBINPUT
 	select BR2_PACKAGE_LIBDRM
 	select BR2_PACKAGE_SEATD
-	select BR2_PACKAGE_SEATD_DAEMON
 	# Runtime dependency
 	select BR2_PACKAGE_XKEYBOARD_CONFIG
 	select BR2_PACKAGE_WESTON_SHELL_DESKTOP if !BR2_PACKAGE_WESTON_HAS_SHELL
@@ -129,10 +128,10 @@ config BR2_PACKAGE_WESTON_XWAYLAND
 	depends on BR2_USE_MMU # xwayland
 	depends on !BR2_STATIC_LIBS # xwayland
 	depends on BR2_TOOLCHAIN_HAS_THREADS # xwayland
-	depends on !BR2_RISCV_32 # xwayland -> xlib_libxshmfence
 	depends on BR2_TOOLCHAIN_HAS_SYNC_4 # xwayland -> xlib_libxshmfence
 	select BR2_PACKAGE_CAIRO
 	select BR2_PACKAGE_LIBXCB
+	select BR2_PACKAGE_XCB_UTIL_CURSOR
 	select BR2_PACKAGE_XLIB_LIBX11
 	select BR2_PACKAGE_XLIB_LIBXCURSOR
 	select BR2_PACKAGE_XWAYLAND
@@ -142,7 +141,6 @@ comment "XWayland support needs libepoxy and X.org enabled"
 
 comment "XWayland support needs a toolchain w/ threads, dynamic library"
 	depends on BR2_USE_MMU
-	depends on !BR2_RISCV_32
 	depends on BR2_TOOLCHAIN_HAS_SYNC_4
 	depends on !BR2_TOOLCHAIN_HAS_THREADS || BR2_STATIC_LIBS
 
@@ -174,6 +172,18 @@ config BR2_PACKAGE_WESTON_SCREENSHARE
 	bool "screenshare"
 	default y
 
+config BR2_PACKAGE_WESTON_SIMPLE_CLIENTS
+	bool "simple clients"
+	help
+	  Simple clients includes application such as:
+	  damage, dmabuf-feedback, dmabuf-egl, dmabuf-v4l, egl
+
+	  In the target filesystem, simple client program binaries are
+	  prefixed with "weston-simple-".
+
+	  Note: Weston has two sets of clients. See also the weston
+	  "demo clients" option.
+
 config BR2_PACKAGE_WESTON_DEMO_CLIENTS
 	bool "demo clients"
 	depends on BR2_USE_MMU # pango
@@ -187,6 +197,18 @@ config BR2_PACKAGE_WESTON_DEMO_CLIENTS
 	select BR2_PACKAGE_PANGO
 	help
 	  This enables the installation of Weston's demo clients.
+
+	  Demo clients includes application such as:
+	  clickdot, confine, content_protection, dnd, editor,
+	  eventdemo, flower, fullscreen, image, multi-resource,
+	  presentation-shm, resizor, scaler, smoke, stacking,
+	  subsurfaces, tablet, transformed...
+
+	  In the target filesystem, demo client program binaries are
+	  prefixed with "weston-".
+
+	  Note: Weston has two sets of clients. See also the weston
+	  "simple clients" option.
 
 comment "demo clients needs an OpenGL ES provider, an OpenEGL-capable Wayland backend and a toolchain w/ wchar, threads, C++, gcc >= 4.9"
 	depends on BR2_USE_MMU

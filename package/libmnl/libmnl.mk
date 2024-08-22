@@ -6,12 +6,13 @@
 
 LIBMNL_VERSION = 1.0.5
 LIBMNL_SOURCE = libmnl-$(LIBMNL_VERSION).tar.bz2
-LIBMNL_SITE = http://netfilter.org/projects/libmnl/files
+LIBMNL_SITE = https://netfilter.org/projects/libmnl/files
 LIBMNL_INSTALL_STAGING = YES
 LIBMNL_LICENSE = LGPL-2.1+
 LIBMNL_LICENSE_FILES = COPYING
 LIBMNL_CPE_ID_VENDOR = netfilter
 # 0001-examples-add-rtnl-link-can.patch patches Makefile.am
+# 0002-include-cache-copy-of-can.h-and-can-netlink.h.patch patches configure.ac
 LIBMNL_AUTORECONF = YES
 
 ifeq ($(BR2_PACKAGE_LIBMNL_EXAMPLES),y)

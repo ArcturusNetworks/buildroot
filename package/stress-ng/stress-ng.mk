@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-STRESS_NG_VERSION = 0.15.07
+STRESS_NG_VERSION = 0.17.07
 STRESS_NG_SITE = $(call github,ColinIanKing,stress-ng,V$(STRESS_NG_VERSION))
 STRESS_NG_LICENSE = GPL-2.0+
 STRESS_NG_LICENSE_FILES = COPYING
@@ -18,6 +18,10 @@ endif
 
 ifeq ($(BR2_PACKAGE_KEYUTILS),y)
 STRESS_NG_DEPENDENCIES += keyutils
+endif
+
+ifeq ($(BR2_TOOLCHAIN_HAS_LIBATOMIC),y)
+STRESS_NG_MAKE_FLAGS += LDFLAGS="$(TARGET_LDFLAGS) -latomic"
 endif
 
 define STRESS_NG_BUILD_CMDS
