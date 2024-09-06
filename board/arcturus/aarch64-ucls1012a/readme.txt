@@ -32,9 +32,6 @@ After building, you should obtain this tree:
     +-- part0-000000.itb
     +-- rootfs.cpio
     +-- rootfs.cpio.gz
-    +-- rootfs.cramfs
-    +-- rootfs.jffs2
-    +-- rootfs.squashfs
     +-- rootfs.tar
     +-- u-boot.bin
     +-- u-boot-firmware.bin
