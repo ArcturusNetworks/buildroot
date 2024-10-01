@@ -1,0 +1,64 @@
+/*
+ * Copyright (C) 2018-2024, Arcturus Networks Inc.
+ *
+ * This file is licensed under the terms of the GNU General Public
+ * License version 2.  This program is licensed "as is" without any
+ * warranty of any kind, whether express or implied.
+ */
+
+/dts-v1/;
+
+/ {
+	description = "Image file for the Arcturus uCMX93-SOM144 Linux Kernel with ramdisk";
+	#address-cells = <1>;
+
+	images {
+		kernel {
+			description = "Linux kernel";
+			data = /incbin/("Image.gz");
+			type = "kernel";
+			arch = "arm64";
+			os = "linux";
+			compression = "gzip";
+			load = <0x80400000>;
+			entry = <0x80400000>;
+			hash {
+				algo = "sha1";
+			};
+		};
+		fdt {
+			description = "Flattened Device Tree blob";
+			data = /incbin/("ucimx93-som144-parallel.dtb");
+			type = "flat_dt";
+			arch = "arm64";
+			compression = "none";
+			load = <0x90000000>;
+			hash {
+				algo = "sha1";
+			};
+		};
+		ramdisk {
+			description = "Ramdisk";
+			data = /incbin/("rootfs.cpio.gz");
+			type = "ramdisk";
+			arch = "arm64";
+			os = "linux";
+			compression = "gzip";
+			hash {
+				algo = "sha1";
+			};
+		};
+	};
+
+	configurations {
+		default = "config1";
+		config1 {
+			kernel = "kernel";
+			fdt = "fdt";
+			ramdisk = "ramdisk";
+			hash {
+				algo = "sha1";
+			};
+		};
+	};
+};
